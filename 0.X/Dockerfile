@@ -19,8 +19,8 @@ RUN addgroup consul && \
 USER root
 
 # Set up certificates, our base tools, and Consul.
-RUN apk add --no-cache ca-certificates curl gnupg libcap openssl && \
-    gpg --keyserver pgp.mit.edu --recv-keys 91A6E7F85D05C65630BEF18951852D87348FFC4C && \
+RUN apk add --no-cache ca-certificates curl gnupg libcap openssl wget && \
+    if [ "$http_proxy" != "" ]; then gpg --keyserver-options http-proxy="$http_proxy" --keyserver-options timeout=120 --keyserver pgp.mit.edu --recv-keys 91A6E7F85D05C65630BEF18951852D87348FFC4C; else gpg --keyserver pgp.mit.edu --keyserver-options timeout=120 --recv-keys 91A6E7F85D05C65630BEF18951852D87348FFC4C; fi && \
     mkdir -p /tmp/build && \
     cd /tmp/build && \
     wget ${HASHICORP_RELEASES}/docker-base/${DOCKER_BASE_VERSION}/docker-base_${DOCKER_BASE_VERSION}_linux_amd64.zip && \
