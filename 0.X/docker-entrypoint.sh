@@ -91,7 +91,7 @@ if [ "$1" = 'consul' ]; then
         setcap "cap_net_bind_service=+ep" /bin/consul
     fi
 
-    set -- gosu consul "$@"
+    set -- gosu root "$@"
 fi
 
 exec "$@"

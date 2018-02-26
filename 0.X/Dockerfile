@@ -16,6 +16,8 @@ ENV HASHICORP_RELEASES=https://releases.hashicorp.com
 RUN addgroup consul && \
     adduser -S -G consul consul
 
+USER root
+
 # Set up certificates, our base tools, and Consul.
 RUN apk add --no-cache ca-certificates curl gnupg libcap openssl && \
     gpg --keyserver pgp.mit.edu --recv-keys 91A6E7F85D05C65630BEF18951852D87348FFC4C && \
