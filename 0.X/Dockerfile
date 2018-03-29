@@ -13,7 +13,7 @@ USER root
 
 COPY "./consul" "/bin"
 
-RUN apt-get -y install wget && \
+RUN apt-get -y install wget curl && \
     wget -c https://github.com/tianon/gosu/releases/download/1.7/gosu-ppc64el && \
     chmod +x gosu-ppc64el && \
     mv gosu-ppc64el gosu && \
